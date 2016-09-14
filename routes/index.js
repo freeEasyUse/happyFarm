@@ -17,9 +17,9 @@ router.get('/', function(req, res, next) {
   ss_isParent = false;
 
   var ss_menu2 = new Object();
-  ss_menu2.showText = '商家设置';
+  ss_menu2.showText = '添加合作商';
   ss_menu2.menuCode = "2";
-  ss_menu2.url = 'model/envirement.html';
+  ss_menu2.url = 'model/partnersManager.html';
   ss_menu2.isParent = false;
 
   s_menu.children = [ss_menu1,ss_menu2];
