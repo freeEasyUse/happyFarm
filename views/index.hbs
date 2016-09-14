@@ -1,0 +1,226 @@
+<section>
+    <!-- 左侧边栏开始-->
+    <div class="left-side sticky-left-side">
+        <!--放置logo开始 -->
+        <div class="logo">
+            <a href="index.html"><img src="images/logo.png" alt=""></a>
+        </div>
+
+        <div class="logo-icon text-center">
+            <a href="index.html"><img src="images/logo_icon.png" alt=""></a>
+        </div>
+        <!--放置logo结束-->
+
+        <div class="left-side-inner">
+
+            <!-- visible to small devices only -->
+            <div class="visible-xs hidden-sm hidden-md hidden-lg">
+                <div class="media logged-user">
+                    <img alt="" src="images/photos/user-avatar.png" class="media-object">
+                    <div class="media-body">
+                        <h4><a href="#">John Doe</a></h4>
+                        <span>"Hello There..."</span>
+                    </div>
+                </div>
+
+                <h5 class="left-nav-title">Account Information</h5>
+                <ul class="nav nav-pills nav-stacked custom-nav">
+                  <li><a href="#"><i class="fa fa-user"></i> <span>Profile</span></a></li>
+                  <li><a href="#"><i class="fa fa-cog"></i> <span>Settings</span></a></li>
+                  <li><a href="#"><i class="fa fa-sign-out"></i> <span>Sign Out</span></a></li>
+                </ul>
+            </div>
+
+            <!--左侧菜单开始-->
+            <ul class="nav nav-pills nav-stacked custom-nav">
+                {{#each menus}}
+                    {{#if isParent}}
+                        <li class="menu-list"><a href=""><i class="fa fa-map-marker"></i><span>{{showText}}</span></a>
+                            <ul class="sub-menu-list">
+                                {{#each children}}
+                                     <li><a href='#' onclick="farm.addTabIem('{{url}}','{{menuCode}}','{{showText}}')">{{showText}}</a></li>
+                                {{/each}}
+                            </ul>
+                        </li>
+                    {{^}}
+                    <li><a href='#' onclick="farm.addTabIem('{{url}}','{{menuCode}}','{{showText}}')"><i class="fa fa-bullhorn"></i><span>{{shotText}}</span></a></li>
+                    {{/if}}
+                {{/each}}
+                <!--
+                <li class="active"><a href="index.html"><i class="fa fa-home"></i> <span>Dashboard</span></a></li>
+                <li><a href="fontawesome.html"><i class="fa fa-bullhorn"></i> <span>Fontawesome</span></a></li>
+                <li class="menu-list"><a href=""><i class="fa fa-bar-chart-o"></i> <span>Charts</span></a>
+                    <ul class="sub-menu-list">
+                        <li><a href="flot_chart.html"> Flot Charts</a></li>
+                        <li><a href="morris.html"> Morris Charts</a></li>
+                        <li><a href="chartjs.html"> Chartjs</a></li>
+                        <li><a href="c3chart.html"> C3 Charts</a></li>
+                    </ul>
+                </li>
+                <li class="menu-list"><a href="#"><i class="fa fa-map-marker"></i> <span>Maps</span></a>
+                    <ul class="sub-menu-list">
+                        <li><a href="google_map.html"> Google Map</a></li>
+                        <li><a href="vector_map.html"> Vector Map</a></li>
+                    </ul>
+                </li>
+                <li><a href="login.html"><i class="fa fa-sign-in"></i> <span>Login Page</span></a></li>
+                -->
+            </ul>
+            <!--sidebar nav end 菜单结束-->
+
+        </div>
+    </div>
+    <!-- 左侧边栏结束-->
+
+    <!-- main content end 主体开始-->
+    <div class="main-content" >
+
+        <!-- header section start 头部开始-->
+        <div class="header-section">
+
+            <!--toggle button start 隐藏显示左边栏-->
+            <a class="toggle-btn"><i class="fa fa-bars"></i></a>
+            <!--toggle button end-->
+
+            <!--search start 收索框-->
+            <form class="searchform" action="index.html" method="post">
+                <input type="text" class="form-control" name="keyword" placeholder="Search here..." />
+            </form>
+            <!--search end-->
+
+            <!--notification menu start  头部菜单 -->
+            <div class="menu-right">
+                <ul class="notification-menu">
+                    <!-- 下拉显示内容 暂时不用
+                    <li>
+                        <a href="#" class="btn btn-default dropdown-toggle info-number" data-toggle="dropdown">
+                            <i class="fa fa-tasks"></i>
+                            <span class="badge">8</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-head pull-right">
+                            <h5 class="title">You have 8 pending task</h5>
+                            <ul class="dropdown-list user-list">
+                                <li class="new">
+                                    <a href="#">
+                                        <div class="task-info">
+                                            <div>Database update</div>
+                                        </div>
+                                        <div class="progress progress-striped">
+                                            <div style="width: 40%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" role="progressbar" class="progress-bar progress-bar-warning">
+                                                <span class="">40%</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="new">
+                                    <a href="#">
+                                        <div class="task-info">
+                                            <div>Dashboard done</div>
+                                        </div>
+                                        <div class="progress progress-striped">
+                                            <div style="width: 90%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="90" role="progressbar" class="progress-bar progress-bar-success">
+                                                <span class="">90%</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <div class="task-info">
+                                            <div>Web Development</div>
+                                        </div>
+                                        <div class="progress progress-striped">
+                                            <div style="width: 66%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="66" role="progressbar" class="progress-bar progress-bar-info">
+                                                <span class="">66% </span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <div class="task-info">
+                                            <div>Mobile App</div>
+                                        </div>
+                                        <div class="progress progress-striped">
+                                            <div style="width: 33%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="33" role="progressbar" class="progress-bar progress-bar-danger">
+                                                <span class="">33% </span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <div class="task-info">
+                                            <div>Issues fixed</div>
+                                        </div>
+                                        <div class="progress progress-striped">
+                                            <div style="width: 80%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="80" role="progressbar" class="progress-bar">
+                                                <span class="">80% </span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="new"><a href="">See All Pending Task</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    -->
+                    <!-- 用户信息 -->
+                    <li>
+                        <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            <img src="images/photos/user-avatar.png" alt="" />
+                            {{userName}}
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
+                            <li><a href="#"><i class="fa fa-user"></i>  Profile</a></li>
+                            <li><a href="#"><i class="fa fa-cog"></i>  Settings</a></li>
+                            <li><a href="#"><i class="fa fa-sign-out"></i> Log Out</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </div>
+            <!--notification menu end 头部菜单结束-->
+
+        </div>
+        <!-- header section end 头部结束-->
+
+        <!-- page heading start-->
+        <div class="page-heading">
+            
+            <div class="row">
+                <div class="col-md-12">
+                    <section class="tile transparent recent-activity">
+                    <div class="tile-widget color rounded-top-corners nopadding">
+                        <ul class="nav nav-tabs tabdrop">
+                            <li class="active">
+                                <a href="#home" data-toggle="tab" aria-expanded="true"><i class="fa fa-file"></i>首页</a>
+                            </li>
+                            <li><a href="#about" data-toggle="tab"><i class="fa fa-file"></i>about</a><span class="label label label-transparent-black tab-close"><i class="fa fa-times"></i></span></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tile-body tab-content nopadding rounded-bottom-corners">
+                        <ul id="home" class="tab-pane fade in active  transparent">
+                            index
+                        </ul>
+                        <ul class="tab-pane fade" id="about">
+                            about
+                        </ul>
+                    </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+        <!-- page heading end-->
+
+
+        <!--footer section start-->
+        <footer>
+            2014 &copy; AdminEx by <a href="http://www.mycodes.net/" target="_blank">happyFarm</a>
+        </footer>
+        <!--footer section end-->
+    </div>
+    <!-- main content end 主题结束-->
+</section>
