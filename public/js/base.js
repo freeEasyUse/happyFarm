@@ -45,6 +45,30 @@ farm.addTabIem = function(url,menuCode,showText){
 };
 
 
+
+
+/**
+ * 初始化表格
+ */
+farm.initTable = function(tableId,optionParam){
+    //定义默认元素
+    var defaultParam = {
+        url:"",
+        columns:[],
+        classes:"table table-responsive table-striped table-hover",
+        //pageNumber:1,   //页数
+        pageSize:10,    //每页条数
+        pageList:[10],
+        locale:'zh-CN',
+        pagination:true,    //是否显示分页
+    }
+    var resultParam = $.extend(defaultParam,optionParam);
+    $(tableId).bootstrapTable(resultParam);
+};
+
+
+
+
 /**
  * 页面加载完成
  */
