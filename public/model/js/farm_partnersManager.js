@@ -5,9 +5,10 @@ farm.partnersManager.initTable = function(tableId){
 
     var settingParam = new Object();
     settingParam.url = '/partners';
-    settingParam.columns = [{
+    settingParam.columns = [
+    {
         field: 'id',
-        title: 'Item ID'
+        title: 'Item ID',
     }, {
         field: 'name',
         title: 'Item Name'
@@ -16,7 +17,6 @@ farm.partnersManager.initTable = function(tableId){
         title: 'Item Price'
     }];
     settingParam.toolbar = '#parteners_toolbar';
-    settingParam.showToggle = true;
 
     //调用公用方法
     farm.initTable('#parteners_table',settingParam);

@@ -61,8 +61,14 @@ farm.initTable = function(tableId,optionParam){
         pageList:[10],
         locale:'zh-CN',
         pagination:true,    //是否显示分页
+        search:true,
+        showToggle:true,   //显示切换按钮
+        showColumns:true,   //显示列切换
+
     }
     var resultParam = $.extend(defaultParam,optionParam);
+    //添加选择列
+    resultParam.columns.unshift({field:'state',checkbox: true});
     $(tableId).bootstrapTable(resultParam);
 };
 
