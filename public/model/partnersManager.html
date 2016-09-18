@@ -5,14 +5,52 @@
             <i class="glyphicon glyphicon-remove"></i> 删除
         </button>
 
-        <button id="parteners_add" class="btn btn-info" disabled>
+        <button id="parteners_add" class="btn btn-info" onclick="farm.partnersManager.openAddModel()">
             <i class="glyphicon glyphicon-plus"></i> 添加
         </button>
 
-        <button id="parteners_update" class="btn btn-warning" disabled>
+        <button id="parteners_update" class="btn btn-warning" onclick="farm.partnersManager.updatePartner()">
             <i class="glyphicon glyphicon-list-alt"></i> 添加
         </button>
     </div>
     <table id="parteners_table"></table>
+    <!-- 模态框 -->
+    <div id="partners_oprate_modal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                     <h4 class="modal-title">添加合作者</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" class="form-control" name="name" placeholder="Name">
+                    </div>
+                    <div class="form-group">
+                        <label>Stars</label>
+                        <input type="number" class="form-control" name="stargazers_count" placeholder="Stars">
+                    </div>
+                    <div class="form-group">
+                        <label>Forks</label>
+                        <input type="number" class="form-control" name="forks_count" placeholder="Forks">
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <input type="text" class="form-control" name="description" placeholder="Description">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary submit">Submit</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
 </div>
+
+
+
+
+
 <script src="model/js/farm_partnersManager.js"></script>

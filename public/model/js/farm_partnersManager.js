@@ -2,7 +2,6 @@ farm.partnersManager = {};
 
 
 farm.partnersManager.initTable = function(tableId){
-
     var settingParam = new Object();
     settingParam.url = '/partners';
     settingParam.columns = [
@@ -28,4 +27,20 @@ farm.partnersManager.initTable = function(tableId){
 $(document).ready(function() {
     farm.partnersManager.initTable('#parteners_table');
 });
+
+//打开模态框 新增
+farm.partnersManager.openAddModel = function(){
+    $('#partners_oprate_modal').modal('show');
+};
+
+//打开模态框 修改
+farm.partnersManager.updatePartner = function(){
+    //打开模态框
+    farm.partnersManager.openAddModel();
+    //获取当前选择的表格记录
+    var select_rows = $('#parteners_table').bootstrapTable('getSelections');
+    console.log(select_rows);
+
+}
+
 
