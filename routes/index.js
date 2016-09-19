@@ -13,7 +13,7 @@ router.get('/',function (req,res,next) {
 /* 主页 */
 router.get('/home', function(req, res, next) {
   //判断是否登录
-  common.authentication(req,res);
+  //common.authentication(req,res);
   //创建左侧菜单内容
   var menus = new Array();
 

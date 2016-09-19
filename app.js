@@ -29,7 +29,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-
+app.use(express.static(path.join(__dirname, 'public')));
 //session配置
 app.use(session({
     cookie: { maxAge: 600000 },
@@ -38,12 +38,17 @@ app.use(session({
         url: Settings.URL,
         db: db})
 }));
+//拦截器
 app.use(function(req, res, next){
-    res.locals.user = req.session.user;
+    var url = req.originalUrl;
+    console.log(url)
+    if (url != "/" && !req.session.user && url.indexOf('loginAndOut')<0) {
+        console.log('go to login');
+        return res.redirect("/");
+    }
     next();
 });
 
-app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
