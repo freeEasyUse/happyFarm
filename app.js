@@ -10,6 +10,13 @@ var users = require('./routes/users');
 var partners = require('./routes/partners');
 var loginAndOut = require('./routes/loginAndOut');
 
+
+//采用connect-mongodb中间件作为Session存储  
+var session = require('express-session');  
+var Settings = require('./database/settings');  
+var MongoStore = require('connect-mongodb');  
+var db = require('./database/msession'); 
+
 var app = express();
 
 // view engine setup
@@ -22,6 +29,20 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+//session配置
+app.use(session({
+    cookie: { maxAge: 600000 },
+    secret: Settings.COOKIE_SECRET,
+    store: new MongoStore({
+        url: Settings.URL,
+        db: db})
+}));
+app.use(function(req, res, next){
+    res.locals.user = req.session.user;
+    next();
+});
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);

@@ -12,11 +12,7 @@ farm.loginAndOut.login = function() {
     for (var i = 0; i < inputs.length; i++) {
     var value = inputs[i].value;
     if (value == '') {
-        $.gritter.add({
-            title : '提示',
-            text : input[i].placeholder + "不能为空！",
-            class_name : 'gritter-error gritter-center  gritter-light'
-        });
+		bootbox.alert({message : inputs[i].placeholder + "不能为空！",title : '提示'});// 弹出提示
         return;
         }
     }
@@ -46,11 +42,7 @@ farm.loginAndOut.login = function() {
 				}
                  */
 			}else{
-				$.gritter.add({
-					title : '提示',
-					text : data.reason,
-					class_name : 'gritter-error gritter-center  gritter-light'
-				});
+				bootbox.alert({message:data.reason,title : '提示'});// 弹出提示
 			}
 		},
 		error : function(data) {
