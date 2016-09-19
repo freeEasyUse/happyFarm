@@ -1,8 +1,16 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
+/**
+ * 用户登录
+ */
+router.get('/',function (req,res,next) {
+  res.render('login', {title:'用户登录'});
+});
+
+
+/* 主页 */
+router.get('/home', function(req, res, next) {
   //创建左侧菜单内容
   var menus = new Array();
 
