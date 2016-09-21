@@ -1,6 +1,5 @@
+var Settings = require('../database/settings');
 var common = new Object();
-
-
 /**
  * 判断是否登录
  */
@@ -9,6 +8,4 @@ common.authentication = function(req, res) {
         return res.redirect('/');
     }
 }
-
-
 module.exports = common;

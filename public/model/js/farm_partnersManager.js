@@ -43,4 +43,9 @@ farm.partnersManager.updatePartner = function(){
 
 }
 
+//新增合作伙伴
+farm.partnersManager.addPartner = function(){
+    $.post('/partners/addPartner');
+}
+
 
