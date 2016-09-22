@@ -76,6 +76,48 @@ farm.initTable = function(tableId,optionParam){
 
 
 /**
+ * 判断是否为数组
+ */
+farm.Ext_isArray = function(obj) {    
+	return Object.prototype.toString.call(obj) === '[object Array]';     
+}
+
+/**
+ * 判断是否为空
+ */
+farm.Ext_isEmpty = function(v){
+    return v === null || v === undefined || v===''||(farm.Ext_isArray(v) && !v.length);
+}
+
+/**
+ * 设置时间控件
+ */
+farm.initDateCombo = function(input,format,defaultValue){
+	if(farm.Ext_isEmpty(input)){
+		return;
+	}
+	//初始化日期组建
+	input.datetimepicker({
+	    language:'zh-CN',
+		forceParse: true,  
+		pickTime: false,
+		todayBtn: true,
+		autoclose:true,
+		minView: 2,
+		format:format
+     }).next().on('click', function(){
+		$(this).prev().focus();
+	 });					  
+	var defaultDate = new Date(defaultValue);
+	if(defaultDate!=undefined){
+		input.datetimepicker('setDate',defaultDate);
+	}
+};
+
+
+
+
+/**
  * 页面加载完成
  */
 $(document).ready(function(){

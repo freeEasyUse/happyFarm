@@ -14,18 +14,26 @@ router.get('/', function(req, res, next) {
     obj.price = i+100;
     result.push(obj);
   }
-
   console.log(JSON.stringify(result));
-  res.send(JSON.stringify(result));
+  dbUtil.queryDocument('parteners',{},res);
 });
 
 /**
  * 合作伙伴新增
  */
 router.post('/addPartner',function(req,res,next){
-   //partnerdb.insertDocument();
-   dbUtil.addDocument('parteners',[{a:89}]);
+    //partnerdb.insertDocument();
+    dbUtil.addDocument('parteners',[req.body],res);
 });
 
+
+/**
+ * 修改伙伴信息
+ */
+router.post('/updatePartner',function(req,res,next){
+    var queryObject = new Object();
+    queryObject._id = req.body.id;
+    dbUtil.updateDocument('parteners',queryObject,req.body,res);
+});
 
 module.exports = router;

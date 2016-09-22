@@ -9,8 +9,8 @@
             <i class="glyphicon glyphicon-plus"></i> 添加
         </button>
 
-        <button id="parteners_update" class="btn btn-warning" onclick="farm.partnersManager.updatePartner()">
-            <i class="glyphicon glyphicon-list-alt"></i> 添加
+        <button id="parteners_update" class="btn btn-warning" onclick="farm.partnersManager.openUpdatePartner()">
+            <i class="glyphicon glyphicon-list-alt"></i> 修改
         </button>
     </div>
     <table id="parteners_table"></table>
@@ -64,7 +64,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-primary submit" onclick="farm.partnersManager.addPartner()">确定</button>
+                    <button type="button" class="btn btn-primary submit" name="farm_savePartner" onclick="farm.partnersManager.savePartner()">保存</button>
+                    <button type="button" class="btn btn-primary submit" name="farm_updatePartner" onclick="farm.partnersManager.updatePartner()">修改</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
