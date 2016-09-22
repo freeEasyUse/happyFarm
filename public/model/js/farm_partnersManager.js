@@ -26,6 +26,15 @@ farm.partnersManager.initTable = function(tableId){
 //加载完成后 执行
 $(document).ready(function() {
     farm.partnersManager.initTable('#parteners_table');
+    //设置时间
+    $("#partners_oprate_modal input[name='farm_partner_createTime']").datetimepicker({
+        format: 'yyyy-mm-dd hh:ii', language: 'zh-CN'
+    });
+
+    $("#partners_oprate_modal input[name='farm_partner_updateTime']").datetimepicker({
+        format: 'yyyy-mm-dd hh:ii', language: 'zh-CN'
+    });
+
 });
 
 //打开模态框 新增

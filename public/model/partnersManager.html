@@ -20,28 +20,50 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                     <h4 class="modal-title">添加合作者</h4>
+                     <h4 class="modal-title">合作人信息</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label>Name</label>
-                        <input type="text" class="form-control" name="name" placeholder="Name">
-                    </div>
-                    <div class="form-group">
-                        <label>Stars</label>
-                        <input type="number" class="form-control" name="stargazers_count" placeholder="Stars">
-                    </div>
-                    <div class="form-group">
-                        <label>Forks</label>
-                        <input type="number" class="form-control" name="forks_count" placeholder="Forks">
-                    </div>
-                    <div class="form-group">
-                        <label>Description</label>
-                        <input type="text" class="form-control" name="description" placeholder="Description">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>伙伴名称</label>
+                                <input type="text" class="form-control" name="farm_partner_name" placeholder="请输入">
+                            </div>
+                            <div class="form-group">
+                                <label>联系方式</label>
+                                <input type="text" class="form-control" name="farm_partner_phone" placeholder="请输入">
+                            </div>
+                            <div class="form-group">
+                                <label>联系地址</label>
+                                <input type="text" class="form-control" name="farm_partner_address" placeholder="请输入">
+                            </div>
+                             <div class="form-group">
+                                <label>密码</label>
+                                <input type="password" class="form-control" name="farm_partner_password" value="111111">
+                            </div> 
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>伙伴编码</label>
+                                <input type="text" class="form-control" name="farm_partner_code" placeholder="请输入">
+                            </div>
+                            <div class="form-group">
+                                <label>创建时间</label>
+                                <input type="text" class="form-control" name="farm_partner_createTime" placeholder="请输入">
+                            </div>
+                            <div class="form-group">
+                                <label>修改时间</label>
+                                <input type="text" class="form-control" name="farm_partner_updateTime" placeholder="请输入">
+                            </div>
+                            <div class="form-group">
+                                <label>描述</label>
+                                <input type="text" class="form-control" name="farm_partner_des" placeholder="请输入">
+                            </div> 
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                     <button type="button" class="btn btn-primary submit" onclick="farm.partnersManager.addPartner()">确定</button>
                 </div>
             </div><!-- /.modal-content -->
