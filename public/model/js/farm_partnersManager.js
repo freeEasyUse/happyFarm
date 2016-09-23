@@ -153,10 +153,38 @@ farm.partnersManager.updatePartner = function(){
         }
         },'json');
     }
-
-
 }
 
+
+
+/**
+ * 删除选中记录
+ */
+farm.partnersManager.deletePartner =  function(){
+    //获取选择记录
+    var selectObjectArray = $('#parteners_table').bootstrapTable('getSelections');
+    if(farm.Ext_isArray(selectObjectArray)&&selectObjectArray.length>0){
+        var partnerCodes = new Array();
+        $.each(selectObjectArray, function(k, v){
+            partnerCodes.push(v.partnerCode);
+        });
+        //发送请求
+        $.post('/partners/deletePartner',{"arrStr":partnerCodes.toString()},function(data){
+        //成功提示
+        if(data.state ==='success'){
+            bootbox.alert({message:'删除合作伙伴成功',title : '提示'});
+            //刷新表格
+            $('#parteners_table').bootstrapTable('refresh',{silent: true});
+        }
+        else{
+            bootbox.alert({message:'删除合作伙伴失败',title : '提示'});
+            }
+        },'json');
+    }
+    else{
+        bootbox.alert({message:'请先选择记录',title : '提示'})
+    }
+}
 
 
 
