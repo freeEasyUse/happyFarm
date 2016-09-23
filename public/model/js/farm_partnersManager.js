@@ -132,9 +132,7 @@ farm.partnersManager.updatePartner = function(){
     //获取当前选择的表格记录
     var selectObjectArray = $('#parteners_table').bootstrapTable('getSelections');
     if(farm.Ext_isArray(selectObjectArray)&&selectObjectArray.length===1){
-        var selectObject = selectObjectArray[0];
         var obj = farm.getModelValue();
-        obj.id = selectObject._id;
         //修改时间
         obj.partnerUpdateTime = new Date();
 

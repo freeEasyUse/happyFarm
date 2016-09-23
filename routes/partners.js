@@ -32,7 +32,7 @@ router.post('/addPartner',function(req,res,next){
  */
 router.post('/updatePartner',function(req,res,next){
     var queryObject = new Object();
-    queryObject._id = req.body.id;
+    queryObject.partnerCode = req.body.partnerCode;
     dbUtil.updateDocument('parteners',queryObject,req.body,res);
 });
 

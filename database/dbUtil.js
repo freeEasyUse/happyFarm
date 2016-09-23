@@ -78,7 +78,7 @@ dbUtil.updateDocument = function(collectionName,queryObject,setObject,res){
             console.log('has error');
         }
         else{
-            dbConection.collection(collectionName).update(queryObject,setObject,function(){
+            dbConection.collection(collectionName).update(queryObject,{$set:setObject},function(){
                 var result = new Object();
                 result.state = 'success';
                 db.close();
