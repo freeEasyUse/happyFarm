@@ -60,11 +60,15 @@ $(document).ready(function() {
 //打开模态框 新增
 farm.partnersManager.openAddModel = function(){
     $('#partners_oprate_modal').modal('show');
+    //清空模态框数据
+    $('#partners_oprate_modal input').val('');
     //设置时间
     $("#partners_oprate_modal input[name='farm_partner_createTime']").datetimepicker('setDate',new Date());
     $("#partners_oprate_modal input[name='farm_partner_updateTime']").datetimepicker('setDate',new Date());
     $("#partners_oprate_modal input[name='farm_partner_createTime']").attr({disabled:'disabled'});
     $("#partners_oprate_modal input[name='farm_partner_updateTime']").attr({disabled:'disabled'});
+    //设置密码
+    $("#partners_oprate_modal input[name='farm_partner_password']").val('111111'); 
     //设置修改按钮隐藏
     $(".modal-footer button[name='farm_updatePartner']").hide();
     $(".modal-footer button[name='farm_savePartner']").show();
@@ -110,8 +114,6 @@ farm.partnersManager.savePartner = function(){
     $.post('/partners/addPartner',obj,function(data){
         //关闭模态框
         $('#partners_oprate_modal').modal('toggle');
-        //清空模态框数据
-        $('#partners_oprate_modal input').val('');
         //成功提示
         if(data.state ==='success'){
             bootbox.alert({message:'新增合作伙伴成功',title : '提示'});
