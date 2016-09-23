@@ -9,4 +9,21 @@ common.authentication = function(req, res) {
     }
 }
 
+
+
+/**
+ * 判断object 是否为空
+ */
+common.isEmptyObject = function(obj){
+    var hasProp = true;
+    for (var prop in obj){  
+        hasProp = false;  
+        break;  
+    }
+    return hasProp;
+}
+
+
+
+
 module.exports = common;

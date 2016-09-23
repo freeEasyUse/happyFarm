@@ -6,15 +6,38 @@ var dbUtil = require('../database/dbUtil');
 
 /* 合作伙伴查询 */
 router.get('/', function(req, res, next) {
-  var result = new Array();
-  for(var i = 0; i<100;i++){
-    var obj = new Object();
-    obj.id = i+1;
-    obj.name = i+'name';
-    obj.price = i+100;
-    result.push(obj);
+  //判断是否有查询条件
+  var objTime = new Object();
+  var strObje = new Object();
+  var searchOtion = new Object();
+  if(req.query.isSearch){
+    //开始时间
+    if(req.query.startTime){
+      var qstartTime = new Date(req.query.startTime);
+      objTime.$gte = qstartTime;
+    }
+    //结束时间
+    if(req.query.startTime){
+      var endTime = new Date(req.query.endTime);
+      endTime.setDate(endTime.getDate()+1);
+      objTime.$lt = endTime;
+    }
+    //编码
+    if(req.query.partnerCode){
+      strObje.$regex = req.query.partnerCode;
+      strObje.$options = 'i';
+    }
+
+    //判断是否为空
+    if(!common.isEmptyObject(objTime)){
+      searchOtion.partnerCreateTime = objTime;
+    }
+    if(!common.isEmptyObject(strObje)){
+      searchOtion.partnerCode = strObje;
+    }
   }
-  dbUtil.queryDocument('parteners',{status:1},res);
+  searchOtion.status = 1;
+  dbUtil.queryDocument('parteners',searchOtion,res);
 });
 
 /**

@@ -55,6 +55,10 @@ $(document).ready(function() {
     //设置时间
     farm.initDateCombo($("#partners_oprate_modal input[name='farm_partner_createTime']"),'yyyy-mm-dd hh:ii');
     farm.initDateCombo($("#partners_oprate_modal input[name='farm_partner_updateTime']"),'yyyy-mm-dd hh:ii');
+
+
+    farm.initDateCombo($("#partners_oprate_mode_seach input[name='farm_partner_search_time_begin']"),'yyyy-mm-dd');
+    farm.initDateCombo($("#partners_oprate_mode_seach input[name='farm_partner_search_time_end']"),'yyyy-mm-dd');
 });
 
 //打开模态框 新增
@@ -191,6 +195,39 @@ farm.partnersManager.deletePartner =  function(){
 
 
 /**
+ * 打开查询面板
+ */
+farm.partnersManager.openSearch = function(){
+     $('#partners_oprate_mode_seach').modal('show');
+}
+
+/**
+ * 条件查询
+ */
+farm.partnersManager.search = function(){
+    //获取查询条件
+    var searchObje = new Object();
+    //开始时间
+    if(!farm.Ext_isEmpty($("#partners_oprate_mode_seach input[name='farm_partner_search_time_begin']").val())){
+        searchObje.startTime = $("#partners_oprate_mode_seach input[name='farm_partner_search_time_begin']").val();
+    }
+    //结束时间
+    if(!farm.Ext_isEmpty($("#partners_oprate_mode_seach input[name='farm_partner_search_time_end']").val())){
+        searchObje.endTime = $("#partners_oprate_mode_seach input[name='farm_partner_search_time_end']").val();
+    }
+    if(!farm.Ext_isEmpty($("#partners_oprate_mode_seach input[name='farm_partner_search_code']").val())){
+        searchObje.partnerCode = $("#partners_oprate_mode_seach input[name='farm_partner_search_code']").val();
+    }
+    searchObje.isSearch = true;
+    //设置bootstrap table 查询参数
+    $('#parteners_table').bootstrapTable('refresh',{query:searchObje});
+    $('#partners_oprate_mode_seach').modal('toggle');
+}
+
+
+
+
+/**
  * 获取面板值
  */
 farm.getModelValue = function(){
@@ -200,8 +237,8 @@ farm.getModelValue = function(){
     obj.partnerAddress = $("#partners_oprate_modal input[name='farm_partner_address']").val();  //地址
     obj.partnerPassword = $("#partners_oprate_modal input[name='farm_partner_password']").val(); //密码
     obj.partnerCode = $("#partners_oprate_modal input[name='farm_partner_code']").val();        //code
-    obj.partnerCreateTime = $("#partners_oprate_modal input[name='farm_partner_createTime']").val();    //创建时间
-    obj.partnerUpdateTime = $("#partners_oprate_modal input[name='farm_partner_updateTime']").val();    //修改时间
+    obj.partnerCreateTime = new Date($("#partners_oprate_modal input[name='farm_partner_createTime']").val());    //创建时间
+    obj.partnerUpdateTime = new Date($("#partners_oprate_modal input[name='farm_partner_updateTime']").val());    //修改时间
     obj.partnerDes = $("#partners_oprate_modal input[name='farm_partner_des']").val();      //描述
     return obj;
 }
