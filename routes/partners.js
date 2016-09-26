@@ -47,6 +47,9 @@ router.post('/addPartner',function(req,res,next){
     //partnerdb.insertDocument();
     //设置合作伙伴状态
     req.body.status = 1;
+    //设置时间
+    req.body.partnerCreateTime = new Date(req.body.partnerCreateTime);
+    req.body.partnerUpdateTime = new Date(req.body.partnerUpdateTime);
     dbUtil.addDocument('parteners',[req.body],res);
 });
 
@@ -57,6 +60,8 @@ router.post('/addPartner',function(req,res,next){
 router.post('/updatePartner',function(req,res,next){
     var queryObject = new Object();
     queryObject.partnerCode = req.body.partnerCode;
+    req.body.partnerCreateTime = new Date(req.body.partnerCreateTime);
+    req.body.partnerUpdateTime = new Date();
     dbUtil.updateDocument('parteners',queryObject,req.body,res);
 });
 
