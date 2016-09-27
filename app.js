@@ -9,6 +9,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var partners = require('./routes/partners');
 var loginAndOut = require('./routes/loginAndOut');
+var field = require('./routes/field');
 
 
 //采用connect-mongodb中间件作为Session存储  
@@ -51,9 +52,10 @@ app.use(function(req, res, next){
 
 
 app.use('/', routes);
-app.use('/users', users);
-app.use('/partners',partners);
-app.use('/loginAndOut',loginAndOut);
+app.use('/users', users); //用户管理
+app.use('/partners',partners);  //合作商管理
+app.use('/loginAndOut',loginAndOut);  //登录 登出
+app.use('/field',field);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -41,9 +41,9 @@ router.get('/home', function(req, res, next) {
   j_menu.showText = '商家管理';
   j_menu.isParent = true;
   var jj_menu1 = new Object();
-  jj_menu1.showText = '分配销售';
+  jj_menu1.showText = '地块管理';
   jj_menu1.menuCode = '3';
-  jj_menu1.url = 'model/envirement.html';
+  jj_menu1.url = 'model/fieldManager.html';
   jj_menu1.isParent = false;
 
   var jj_menu2 = new Object();

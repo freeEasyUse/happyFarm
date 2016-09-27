@@ -50,7 +50,7 @@ farm.partnersManager.initTable = function(tableId){
     settingParam.toolbar = '#parteners_toolbar';
 
     //调用公用方法
-    farm.initTable('#parteners_table',settingParam);
+    farm.initTable(tableId,settingParam);
 
 };
 

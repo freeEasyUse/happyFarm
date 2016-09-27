@@ -1,82 +1,87 @@
+<!-- 商家地块管理 -->
 <div class="tab-content nopadding rounded-bottom-corners">
-    <h1>合作商管理</h1>
-    <div id="parteners_toolbar">
-        <button id="parteners_remove" class="btn btn-danger" onclick="farm.partnersManager.deletePartner()">
+    <h1>地块管理</h1>
+    <div id="field_toolbar">
+        <button id="parteners_remove" class="btn btn-danger">
             <i class="glyphicon glyphicon-remove"></i> 删除
         </button>
 
-        <button id="parteners_add" class="btn btn-info" onclick="farm.partnersManager.openAddModel()">
+        <button class="btn btn-info" onclick="farm.field.openAddModel()">
             <i class="glyphicon glyphicon-plus"></i> 添加
         </button>
 
-        <button id="parteners_update" class="btn btn-warning" onclick="farm.partnersManager.openUpdatePartner()">
+        <button id="field_update" class="btn btn-warning">
             <i class="glyphicon glyphicon-list-alt"></i> 修改
         </button>
 
-        <button id="parteners_update" class="btn btn-warning" onclick="farm.partnersManager.openSearch()">
+        <button id="field_update" class="btn btn-warning">
             <i class="glyphicon glyphicon-list-alt"></i> 查询
         </button>
     </div>
-    <table id="parteners_table"></table>
+    <table id="field_table"></table>
     <!-- 模态框 -->
-    <div id="partners_oprate_modal" class="modal fade">
+    <div id="field_oprate_modal" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                     <h4 class="modal-title">合作人信息</h4>
+                     <h4 class="modal-title">地块信息</h4>
                 </div>
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>伙伴名称</label>
-                                <input type="text" class="form-control" name="farm_partner_name" placeholder="请输入">
+                                <label>地块名称</label>
+                                <input type="text" class="form-control" name="field_name" placeholder="请输入">
                             </div>
                             <div class="form-group">
-                                <label>联系方式</label>
-                                <input type="text" class="form-control" name="farm_partner_phone" placeholder="请输入">
+                                <label>地块编号</label>
+                                <input type="text" class="form-control" name="field_code" placeholder="请输入">
                             </div>
                             <div class="form-group">
-                                <label>联系地址</label>
-                                <input type="text" class="form-control" name="farm_partner_address" placeholder="请输入">
+                                <label>商家编码</label>
+                                <input type="text" class="form-control" name="field_partnerCode" placeholder="请输入">
                             </div>
                              <div class="form-group">
-                                <label>密码</label>
-                                <input type="password" class="form-control" name="farm_partner_password" value="111111">
+                                <label>商家名称</label>
+                                <input type="password" class="form-control" name="field_partnerName" value="111111">
                             </div> 
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>伙伴编码</label>
-                                <input type="text" class="form-control" name="farm_partner_code" placeholder="请输入">
+                                <label>地块大小</label>
+                                <input type="text" class="form-control" name="field_size" placeholder="请输入">
+                            </div>
+                            <div class="form-group">
+                                <label>监控设备</label>
+                                <input type="text" class="form-control" name="field_video" placeholder="请输入">
                             </div>
                             <div class="form-group">
                                 <label>创建时间</label>
-                                <input type="text" class="form-control" name="farm_partner_createTime" placeholder="请输入">
+                                <input type="text" class="form-control" name="field_createTime" placeholder="请输入">
                             </div>
                             <div class="form-group">
                                 <label>修改时间</label>
-                                <input type="text" class="form-control" name="farm_partner_updateTime" placeholder="请输入">
+                                <input type="text" class="form-control" name="field_updateTime" placeholder="请输入">
                             </div>
                             <div class="form-group">
                                 <label>描述</label>
-                                <input type="text" class="form-control" name="farm_partner_des" placeholder="请输入">
+                                <input type="text" class="form-control" name="field_des" placeholder="请输入">
                             </div> 
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-primary submit" name="farm_savePartner" onclick="farm.partnersManager.savePartner()">保存</button>
-                    <button type="button" class="btn btn-primary submit" name="farm_updatePartner" onclick="farm.partnersManager.updatePartner()">修改</button>
+                    <button type="button" class="btn btn-primary submit" name="field_savePartner" onclick="farm.partnersManager.savePartner()">保存</button>
+                    <button type="button" class="btn btn-primary submit" name="field_updatePartner" onclick="farm.partnersManager.updatePartner()">修改</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div>
 
     <!-- 查询弹出 -->
-    <div id="partners_oprate_mode_seach" class="modal fade">
+    <div id="field_oprate_mode_seach" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -89,30 +94,30 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>开始时间</label>
-                                <input type="datetime" class="form-control" name="farm_partner_search_time_begin" placeholder="请选择">
+                                <input type="datetime" class="form-control" name="field_search_time_begin" placeholder="请选择">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>结束时间</label>
-                                <input type="datetime" class="form-control" name="farm_partner_search_time_end" placeholder="请选择">
+                                <input type="datetime" class="form-control" name="field_search_time_end" placeholder="请选择">
                             </div>
                         </div>
 
                          <div class="col-md-4">
                             <div class="form-group">
-                                <label>合作商编号</label>
-                                <input type="input" class="form-control" name="farm_partner_search_code" placeholder="请输入">
+                                <label>地块编码</label>
+                                <input type="input" class="form-control" name="field_search_code" placeholder="请输入">
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-primary submit" onclick="farm.partnersManager.search()">查询</button>
+                    <button type="button" class="btn btn-primary submit">查询</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<script src="model/js/farm_partnersManager.js"></script>
+<script src="model/js/farm_fieldManager.js"></script>

@@ -17,7 +17,7 @@ router.get('/', function(req, res, next) {
       objTime.$gte = qstartTime;
     }
     //结束时间
-    if(req.query.startTime){
+    if(req.query.endTime){
       var endTime = new Date(req.query.endTime);
       endTime.setDate(endTime.getDate()+1);
       objTime.$lt = endTime;
