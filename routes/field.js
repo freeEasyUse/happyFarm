@@ -1,49 +1,51 @@
 var express = require('express');
 var router = express.Router();
 var common = require('../common/common');
-var dbUtil = require('../database/dbUtil');
+var mongooseUtil = require('../database/mongooseUtil');
+var mongoose = require('mongoose');
 
 /**
  * 商家 地块管理
  */
 
+//创建商家地块 Schema
+var FieldSchema = mongoose.Schema({
+    fieldName: String,
+    fieldCode:String,
+    fieldPartnerCode:String,
+    fieldPartnerName:String,
+    fieldSize:Number,
+    fieldCreateTime:Date,
+    fieldUpdateTime:Date,
+    fieldVedio:String,
+    fieldDes:String,
+    fieldUserCode:String,
+    fieldStatus:Number,
+    fieldUserName:String
+});
+
+
+//创建商家model
+var Field = mongoose.model('Field', FieldSchema)
 
 //商家 所属地块查询  查询
 router.get('/', function(req, res, next) {
-  //判断是否有查询条件
-  var objTime = new Object();
-  var strObje = new Object();
-  var searchOtion = new Object();
-  if(req.query.isSearch){
-    //地块创建开始时间
-    if(req.query.startTime){
-      var qstartTime = new Date(req.query.startTime);
-      objTime.$gte = qstartTime;
-    }
-    //地块创建结束时间
-    if(req.query.endTime){
-      var endTime = new Date(req.query.endTime);
-      endTime.setDate(endTime.getDate()+1);
-      objTime.$lt = endTime;
-    }
-    //地块编码
-    if(req.query.fieldCode){
-      strObje.$regex = req.query.fieldCode;
-      strObje.$options = 'i';
-    }
-
-    //判断是否为空
-    if(!common.isEmptyObject(objTime)){
-      searchOtion.fieldCreateTime = objTime;
-    }
-    if(!common.isEmptyObject(strObje)){
-      searchOtion.fieldCode = strObje;
-    }
-  }
-  searchOtion.status = 1;
-  dbUtil.queryDocument('fields',searchOtion,res);
+  mongooseUtil.executeQuery(Field,{},res)
 });
 
+
+
+/**
+ * 商家地块新增
+ */
+router.post('/addField',function(req,res,next){
+    //partnerdb.insertDocument();
+    //设置时间
+    req.body.fieldCreateTime = new Date(req.body.fieldCreateTime);
+    req.body.fieldUpdateTime = new Date(req.body.fieldUpdateTime);
+    var fieldEntity = new Field(req.body);
+    mongooseUtil.executeSave(fieldEntity,res);
+});
 
 
 module.exports = router;
