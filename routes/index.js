@@ -9,6 +9,17 @@ router.get('/',function (req,res,next) {
   res.render('login', {title:'用户登录'});
 });
 
+/**
+ * 管理人员登录
+ */
+router.get('/manager',function (req,res,next) {
+  res.render('manager', {title:'管理人员登录'});
+});
+
+
+
+
+
 
 /* 主页 */
 router.get('/home', function(req, res, next) {

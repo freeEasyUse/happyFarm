@@ -43,9 +43,11 @@ app.use(session({
 app.use(function(req, res, next){
     var url = req.originalUrl;
     console.log(url)
-    if (url != "/" && !req.session.user && url.indexOf('loginAndOut')<0) {
-        console.log('go to login');
-        return res.redirect("/");
+    if (url!="/manager" &&url != "/" && !req.session.user && url.indexOf('loginAndOut')<0) {
+       if(url==="/manager"){
+          return res.redirect("/manager");
+       }
+       return res.redirect("/");
     }
     next();
 });
