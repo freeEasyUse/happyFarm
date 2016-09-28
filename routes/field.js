@@ -25,12 +25,12 @@ var FieldSchema = mongoose.Schema({
 });
 
 
-//创建商家model
+//创建地块model
 var Field = mongoose.model('Field', FieldSchema)
 
 //商家 所属地块查询  查询
 router.get('/', function(req, res, next) {
-  mongooseUtil.executeQuery(Field,{},res)
+  mongooseUtil.executeQuery(Field,{fieldStatus:{$ne:'0'}},res)
 });
 
 
@@ -47,5 +47,30 @@ router.post('/addField',function(req,res,next){
     mongooseUtil.executeSave(fieldEntity,res);
 });
 
+
+
+/**
+ * 地块修改
+ */
+router.post('/updateField',function(req,res,next){
+    //获取查询值
+    var queryObject = new Object();
+    queryObject.fieldCode = req.body.fieldCode;
+    //时间设置
+    req.body.fieldCreateTime = new Date(req.body.fieldCreateTime);
+    req.body.fieldUpdateTime = new Date(new Date());
+    mongooseUtil.executeUpdate(Field,queryObject,{$set:req.body},res);
+});
+
+
+/**
+ * 地块删除
+ */
+router.post('/deleteField',function(req,res,next){
+    var setObject = new Object();
+    setObject.fieldStatus = '0';
+    var arr = (req.body.arrStr).split(',');
+    mongooseUtil.executeUpdate(Field,{fieldCode:{$in:arr}},{$set:setObject},res);
+})
 
 module.exports = router;

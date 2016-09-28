@@ -38,5 +38,22 @@ mongooseHelp.executeQuery = function(model,queryObject,res){
     });
 }
 
+/**
+ * 使用mongoose 修改记录
+ */
+mongooseHelp.executeUpdate = function(model,queryObject,updateOption,res){
+    model.update(queryObject,updateOption,function(err){
+        var result = new Object();
+        if(err){
+            result.state = 'error';
+            console.log('update error');
+        }
+        else{
+            result.state = 'success';
+        }
+        res.send(JSON.stringify(result));
+    })
+}
+
 
 module.exports = mongooseHelp;

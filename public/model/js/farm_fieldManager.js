@@ -89,6 +89,38 @@ $(document).ready(function() {
  */
 farm.field.openAddModel = function(){
     $('#field_oprate_modal').modal('show');
+
+    $("#field_oprate_modal input[name='field_createTime']").datetimepicker('setDate',new Date());
+    $("#field_oprate_modal input[name='field_updateTime']").datetimepicker('setDate',new Date());
+    $("#field_oprate_modal input[name='field_createTime']").attr({disabled:'disabled'});
+    $("#field_oprate_modal input[name='field_updateTime']").attr({disabled:'disabled'});
+
+    //隐藏新增按钮 显示修改按钮
+    $(".modal-footer button[name='field_savePartner']").show();
+    $(".modal-footer button[name='field_updatePartner']").hide();
+}
+
+/**
+ * 打开修改模态框
+ */
+farm.field.openUpdateModel = function(){
+    //获取当前选中记录
+    var selectObjectArray = $('#field_table').bootstrapTable('getSelections');
+    if(farm.Ext_isArray(selectObjectArray)&&selectObjectArray.length===1){
+        //打开模态框
+        farm.field.openAddModel();
+        var selectObject = selectObjectArray[0];
+        farm.field.setOptionValue(selectObject);
+
+        //隐藏新增按钮 显示修改按钮
+        $(".modal-footer button[name='field_savePartner']").hide();
+        $(".modal-footer button[name='field_updatePartner']").show();
+
+
+    }
+    else{
+         bootbox.alert({message:'请选择一条记录进行修改',title : '提示'});
+    }
 }
 
 /**
@@ -103,14 +135,62 @@ farm.field.saveField = function(){
         $('#field_oprate_modal').modal('toggle');
         //成功提示
         if(data.state ==='success'){
-            bootbox.alert({message:'新增合作伙伴成功',title : '提示'});
+            bootbox.alert({message:'新增操作成功',title : '提示'});
             //刷新表格
             $('#field_table').bootstrapTable('refresh',{silent: true});
         }
         else{
-            bootbox.alert({message:'新增合作伙伴失败',title : '提示'});
+            bootbox.alert({message:'新增操作失败',title : '提示'});
         }
     },'json');
+}
+
+
+
+/**
+ * 修改内容
+ */
+farm.field.updateField = function(){
+    var obj = farm.field.getOptionValue();
+    $.post('/field/updateField',obj,function(data){
+        //关闭模态框
+        $('#field_oprate_modal').modal('toggle');
+        //成功提示
+        if(data.state ==='success'){
+            bootbox.alert({message:'修改操作成功',title : '提示'});
+            //刷新表格
+            $('#field_table').bootstrapTable('refresh',{silent: true});
+        }
+        else{
+                bootbox.alert({message:'修改操作失败',title : '提示'});
+        }
+    },'json');
+}
+
+
+/**
+ * 删除记录
+ */
+farm.field.removeField = function(){
+    var selectObjectArray = $('#field_table').bootstrapTable('getSelections');
+    if(farm.Ext_isArray(selectObjectArray)&&selectObjectArray.length>0){
+        var fieldCodes = new Array();
+        $.each(selectObjectArray, function(k, v){
+            fieldCodes.push(v.fieldCode);
+        });
+        //发送请求
+        $.post('/field/deleteField',{"arrStr":fieldCodes.toString()},function(data){
+        //成功提示
+        if(data.state ==='success'){
+            bootbox.alert({message:'删除操作伙伴成功',title : '提示'});
+            //刷新表格
+            $('#field_table').bootstrapTable('refresh',{silent: true});
+        }
+        else{
+            bootbox.alert({message:'删除操作伙伴失败',title : '提示'});
+            }
+        },'json');
+    }
 }
 
 
@@ -132,4 +212,35 @@ farm.field.getOptionValue = function(){
     obj.fieldDes = $("#field_oprate_modal input[name='field_des']").val();     //描述
     obj.fieldUserName = $("#field_oprate_modal input[name='field_userName']").val();    //当前租用人名字
     return obj;
+}
+
+
+
+/**
+ * 根据表格内容 设置修改值
+ */
+farm.field.setOptionValue = function(obj){
+    //设置显示值
+    $("#field_oprate_modal input[name='field_name']").val(obj.fieldName);    //地块名字
+    $("#field_oprate_modal input[name='field_code']").val(obj.fieldCode);    //地块编码
+    $("#field_oprate_modal input[name='field_partnerCode']").val(obj.fieldPartnerCode);    //所属商家编码
+    $("#field_oprate_modal input[name='field_partnerName']").val(obj.fieldPartnerName);    //所属商家名字
+    $("#field_oprate_modal select[select='field_status']").val(obj.fieldStatus);    //状态
+    $("#field_oprate_modal input[name='field_userCode']").val(obj.fieldUserCode);    //当前租用人编码
+    $("#field_oprate_modal input[name='field_size']").val(obj.fieldSize);    //地块大小
+    $("#field_oprate_modal input[name='field_video']").val(obj.fieldVedio);    //视频
+    $("#field_oprate_modal input[name='field_createTime']").val(obj.fieldCreateTime);    //创建时间
+    $("#field_oprate_modal input[name='field_updateTime']").val(obj.fieldUpdateTime);    //修改时间
+    $("#field_oprate_modal input[name='field_des']").val(obj.fieldDes);     //描述
+    $("#field_oprate_modal input[name='field_userName']").val(obj.fieldUserName);    //当前租用人名字
+
+    //设置改项目
+    $("#field_oprate_modal input[name='field_code']").attr({disabled:'disabled'});
+    $("#field_oprate_modal input[name='field_partnerCode']").attr({disabled:'disabled'});
+    $("#field_oprate_modal input[name='field_partnerName']").attr({disabled:'disabled'});
+    $("#field_oprate_modal input[name='field_userCode']").attr({disabled:'disabled'});
+    $("#field_oprate_modal input[name='field_userName']").attr({disabled:'disabled'});
+    $("#field_oprate_modal input[name='field_createTime']").attr({disabled:'disabled'});
+    $("#field_oprate_modal input[name='field_updateTime']").attr({disabled:'disabled'});
+
 }
