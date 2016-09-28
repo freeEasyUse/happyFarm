@@ -8,7 +8,22 @@
         <div class="login-wrap">
             <input type="text" class="form-control" placeholder="用户名" autofocus>
             <input type="password" class="form-control" placeholder="密码">
-
+             <!-- 选择登录类型 -->
+            <div class="row form-inline">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <span class="label label-info">平台</span>
+                        <input type="radio" class="form-control" name="managerType"/>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                      <span class="label label-info">商家</span>
+                      <input type="radio" class="form-control" name="managerType"/>
+                    </div>
+                </div>
+            </div>
+  
             <button class="btn btn-lg btn-login btn-block" type="button" onclick="farm.loginAndOut.login()">
                 <i class="fa fa-check"></i>
             </button>
@@ -43,5 +58,4 @@
             </div>
         </div>
         <!-- modal -->
-
 </div>

@@ -22,6 +22,16 @@ router.post('/login', function(req, res, next) {
 
 
 /**
+ * 管理人员登录
+ */
+router.post('/manager/login',function(){
+    //判断登录类型 是合作商 和 平台人员
+})
+
+
+
+
+/**
  * 用户退出
  */
 

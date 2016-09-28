@@ -13,7 +13,7 @@ router.get('/',function (req,res,next) {
  * 管理人员登录
  */
 router.get('/manager',function (req,res,next) {
-  res.render('manager', {title:'管理人员登录'});
+  res.render('managerLogin', {title:'管理人员登录'});
 });
 
 
