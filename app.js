@@ -44,8 +44,9 @@ app.use(function(req, res, next){
     var url = req.originalUrl;
     console.log(url)
     if (url!="/manager" &&url != "/" && !req.session.user && url.indexOf('loginAndOut')<0) {
-       if(url==="/manager"){
-          return res.redirect("/manager");
+       var type = req.query.type;
+       if(type.indexOf('p')==0){
+         return res.redirect("/manager");
        }
        return res.redirect("/");
     }

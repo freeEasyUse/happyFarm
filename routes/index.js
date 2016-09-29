@@ -59,8 +59,8 @@ router.get('/home', function(req, res, next) {
 
   var jj_menu2 = new Object();
   jj_menu2.menuCode = '4';
-  jj_menu2.showText = '统计';
-  jj_menu2.url = 'model/envirement.html';
+  jj_menu2.showText = '用户创建';
+  jj_menu2.url = 'model/userManager.html';
   jj_menu2.isParent = false;
 
   j_menu.children = [jj_menu2,jj_menu1];

@@ -1,6 +1,6 @@
 <!-- 登录 -->
 <div class="container">
-    <form class="form-signin" id="loginAndOut_loginForm" action="index.html">
+    <form class="form-signin" id="manager_loginForm" action="index.html">
         <div class="form-signin-heading text-center">
             <h1 class="sign-title">登录</h1>
             <img src="images/login-logo.png" alt=""/>
@@ -13,18 +13,18 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <span class="label label-info">平台</span>
-                        <input type="radio" class="form-control" name="managerType"/>
+                        <input type="radio" class="form-control" name="managerType" value="p"/>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                       <span class="label label-info">商家</span>
-                      <input type="radio" class="form-control" name="managerType"/>
+                      <input type="radio" class="form-control" name="managerType" checked="checked" value="s"/>
                     </div>
                 </div>
             </div>
   
-            <button class="btn btn-lg btn-login btn-block" type="button" onclick="farm.loginAndOut.login()">
+            <button class="btn btn-lg btn-login btn-block" type="button" onclick="farm.loginAndOut.managerLogin()">
                 <i class="fa fa-check"></i>
             </button>
 

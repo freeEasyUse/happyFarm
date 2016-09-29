@@ -65,6 +65,45 @@ dbUtil.queryDocument = function(collectionName,queryObject,res){
 }
 
 
+
+
+/**
+ * 登录查询
+ */
+dbUtil.loginQuery = function(collectionName,queryObject,req,res,code,name){
+     db.open(function(error,dbConection){
+       if(error){
+            console.log('has error');
+        }
+        else{
+            dbConection.collection(collectionName).findOne(queryObject,function(error,doc){
+                var result = new Object();
+                if(error){
+                    console.log('query error');
+                    result.status = 'error';
+                }
+                else{
+                   if(doc){
+                       var userSession = new Object();
+                       userSession.userCode  = doc[code];
+                       userSession.userName = doc[name];
+                       req.session.user = userSession;
+                       result.status = "Success";
+                   }
+                   else{
+                        result.status = 'error';
+                   }
+                }
+                res.send(JSON.stringify(result));
+                db.close();
+            });
+        }
+     });
+}
+
+
+
+
 /**
  * 修改记录
  * collectionName 连接名
