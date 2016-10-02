@@ -3,31 +3,11 @@ var router = express.Router();
 var common = require('../common/common');
 var mongooseUtil = require('../database/mongooseUtil');
 var mongoose = require('mongoose');
+var Field = require('../database/entity/fieldEntity')
 
 /**
  * 商家 地块管理
  */
-
-//创建商家地块 Schema
-var FieldSchema = mongoose.Schema({
-    fieldName: String,
-    fieldCode:String,
-    fieldPartnerCode:String,
-    fieldPartnerName:String,
-    fieldSize:Number,
-    fieldCreateTime:Date,
-    fieldUpdateTime:Date,
-    fieldVedio:String,
-    fieldDes:String,
-    fieldUserCode:String,
-    fieldStatus:Number,
-    fieldUserName:String
-});
-
-
-//创建地块model
-var Field = mongoose.model('Field', FieldSchema)
-
 //商家 所属地块查询  查询
 router.get('/', function(req, res, next) {
   mongooseUtil.executeQuery(Field,{fieldStatus:{$ne:'0'}},res)

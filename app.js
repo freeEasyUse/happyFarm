@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
+var businessUserManager = require('./routes/businessUserManager');
 var partners = require('./routes/partners');
 var loginAndOut = require('./routes/loginAndOut');
 var field = require('./routes/field');
@@ -55,7 +55,7 @@ app.use(function(req, res, next){
 
 
 app.use('/', routes);
-app.use('/users', users); //用户管理
+app.use('/businessUser', businessUserManager); //用户管理
 app.use('/partners',partners);  //合作商管理
 app.use('/loginAndOut',loginAndOut);  //登录 登出
 app.use('/field',field);
