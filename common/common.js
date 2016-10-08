@@ -23,7 +23,18 @@ common.isEmptyObject = function(obj){
     return hasProp;
 }
 
+/**
+ * 设置地块状态
+ */
+common.state_free = 0;  //可用状态
+common.state_in_use = 1;  //在用状态
+common.state_no_use = 2;  //废弃状态
 
+/**
+ * 一般状态
+ */
+common.state_able = 1;  //有效
+common.state_unable = 0;   //无效
 
 
 module.exports = common;

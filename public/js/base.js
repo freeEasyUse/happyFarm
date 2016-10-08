@@ -107,11 +107,10 @@ farm.initDateCombo = function(input,format,defaultValue){
 		format:format
      }).next().on('click', function(){
 		$(this).prev().focus();
-	 });					  
-	var defaultDate = new Date(defaultValue);
-	if(defaultDate!=undefined){
-		input.datetimepicker('setDate',defaultDate);
-	}
+	 });
+     if(defaultValue!=null){
+         input.datetimepicker('setDate',defaultValue);
+     }
 };
 
 

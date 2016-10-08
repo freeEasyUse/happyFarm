@@ -10,7 +10,7 @@ var Field = require('../database/entity/fieldEntity')
  */
 //商家 所属地块查询  查询
 router.get('/', function(req, res, next) {
-  mongooseUtil.executeQuery(Field,{fieldStatus:{$ne:'0'}},res)
+  mongooseUtil.executeQuery(Field,{fieldStatus:{$ne:common.state_no_use}},res)
 });
 
 

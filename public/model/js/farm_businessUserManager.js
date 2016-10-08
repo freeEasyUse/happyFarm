@@ -38,7 +38,11 @@ farm.businessUser.initComment = function(){
             }
         });
 
-    
+        //设置时间
+        farm.initDateCombo($("#businessUserManager_oprate_modal input[name='buserCreateDate']"),'yyyy-mm-dd hh:ii',new Date());
+        farm.initDateCombo($("#businessUserManager_oprate_modal input[name='buserUpdateDate']"),'yyyy-mm-dd hh:ii',new Date());
+        farm.initDateCombo($("#businessUserManager_oprate_modal input[name='buserFieldStartDate']"),'yyyy-mm-dd',new Date());
+        farm.initDateCombo($("#businessUserManager_oprate_modal input[name='buserFieldEndDate']"),'yyyy-mm-dd',new Date());
 
 }
 
@@ -102,9 +106,9 @@ farm.businessUser.initTable = function(tableId){
 
 //加载完成后 执行
 $(document).ready(function() {
-    //farm.businessUser.initTable("#businessUserManager_table");
+    farm.businessUser.initTable("#businessUserManager_table");
     console.log('document ready');
-    farm.businessUser.initComment();
+    //farm.businessUser.initComment();
 });
 
 
@@ -112,13 +116,40 @@ $(document).ready(function() {
  * 打开新增
  */
 farm.businessUser.openAddModel = function(){
+     farm.businessUser.initComment();
      $('#businessUserManager_oprate_modal').modal('show');
 }
 
 
+/**
+ * 保存新增
+ */
+farm.businessUser.save = function(){
+       //获取新增输入
+    var obj = farm.businessUser.getOptionValue();
+    //发送请求
+    $.post('/businessUser/addBusinessUser',obj,function(data){
+        //关闭模态框
+        $('#businessUserManager_oprate_modal').modal('toggle');
+        //成功提示
+        if(data.state ==='success'){
+            bootbox.alert({message:'新增操作成功',title : '提示'});
+            //刷新表格
+            $('#businessUserManager_table').bootstrapTable('refresh',{silent: true});
+        }
+        else{
+            bootbox.alert({message:'新增操作失败',title : '提示'});
+        }
+    },'json');
+}
+
+
+
+
+
+
 
 farm.businessUser.getOptionValue = function(){
-
     var obj = new Object();
     obj.buserCardNumber = $("#businessUserManager_oprate_modal input[name='buserCardNumber']").val(); //证件号
     obj.buserName = $("#businessUserManager_oprate_modal input[name='buserName']").val();   //用户名
@@ -130,8 +161,5 @@ farm.businessUser.getOptionValue = function(){
     obj.buserFieldStartDate = $("#businessUserManager_oprate_modal input[name='buserFieldStartDate']").val();//租用开始时间
     obj.buserFieldEndDate = $("#businessUserManager_oprate_modal input[name='buserFieldEndDate']").val();//租用到期时间
     obj.buserBusinessDes = $("#businessUserManager_oprate_modal input[name='buserBusinessDes']").val();//描述
-
     return obj;
-
-
 }

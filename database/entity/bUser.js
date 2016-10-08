@@ -10,9 +10,11 @@ var BUserSchema = mongoose.Schema({
     buserBusinessCode:String,
     buserFieldStartDate:Date,
     buserFieldEndDate:Date,
-    buserBusinessDes:String
+    buserBusinessDes:String,
+    buserState:Number
 });
 
 
 //创建地块model
-var BUser = mongoose.model('BUser', BUserSchema)
+var BUser = mongoose.model('BUser', BUserSchema);
+module.exports = BUser;
