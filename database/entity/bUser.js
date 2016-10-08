@@ -7,6 +7,7 @@ var BUserSchema = mongoose.Schema({
     buserCreateDate:Date,
     buserUpdateDate:Date,
     buserFieldCode:String,
+    buserFieldName:String,
     buserBusinessCode:String,
     buserFieldStartDate:Date,
     buserFieldEndDate:Date,

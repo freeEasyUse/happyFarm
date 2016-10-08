@@ -83,7 +83,7 @@ farm.partnersManager.openAddModel = function(){
     $(".modal-footer button[name='farm_updatePartner']").hide();
     $(".modal-footer button[name='farm_savePartner']").show();
     //改变不可以编辑
-    $("#partners_oprate_modal input[name='farm_partner_password']").removeAttr("disabled");;
+    $("#partners_oprate_modal input[name='farm_partner_password']").removeAttr("disabled");
     $("#partners_oprate_modal input[name='farm_partner_code']").removeAttr("disabled");
 };
 
