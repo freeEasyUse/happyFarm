@@ -30,6 +30,31 @@ router.post('/addBusinessUser',function(req,res,next){
 
 
 /**
+ * 修改
+ */
+router.post('/updateBusinessUser',function(req,res,next){
+      req.body.buserCreateDate = new Date(req.body.buserCreateDate);
+      req.body.buserUpdateDate = new Date();
+      req.body.buserFieldStartDate = new Date(req.body.buserFieldStartDate);
+      req.body.buserFieldEndDate = new Date(req.body.buserFieldEndDate);
+      //req.body.buserState = common.state_able;
+      var bUser = new BUser(req.body);
+      mongooseUtil.commitTwoStepUpdate(bUser,BUser,Field,req.body,res);
+})
+
+
+
+/**
+ * 删除
+ */
+router.post('/deleteBuser',function(req,res,next){
+    var arr = (req.body.arrStr).split(',');
+    mongooseUtil.commitTwoDelete(BUser,Field,arr,res);
+});
+
+
+
+/**
  * 查询当前可以分配给用户的地块
  */
 router.get('/getAbleField',function(req,res,next){

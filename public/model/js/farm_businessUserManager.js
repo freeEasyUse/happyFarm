@@ -152,6 +152,34 @@ farm.businessUser.openUpdateModel = function(){
      }
 }
 
+/**
+ * 删除记录
+ */
+farm.businessUser.deleteBuser = function(){
+    //获取 选中记录
+    var selectObjectArray = $('#businessUserManager_table').bootstrapTable('getSelections');
+    if(farm.Ext_isArray(selectObjectArray)&&selectObjectArray.length>0){
+        var buserCode = new Array();
+        $.each(selectObjectArray, function(k, v){
+            buserCode.push(v.buserCardNumber);
+        });
+
+        $.post('/businessUser/deleteBuser',{"arrStr":buserCode.toString()},function(data){
+        //成功提示
+        if(data.state ==='success'){
+            bootbox.alert({message:'删除成功',title : '提示'});
+            //刷新表格
+            $('#businessUserManager_table').bootstrapTable('refresh',{silent: true});
+        }
+        else{
+            bootbox.alert({message:'删除失败',title : '提示'});
+            }
+        },'json');
+    }
+    else{
+        bootbox.alert({message:'请选择需要删除的记录',title : '提示'});
+    }
+}
 
 
 
@@ -201,7 +229,6 @@ farm.businessUser.updateSave = function(){
         }
     },'json');   
 }
-
 
 
 
