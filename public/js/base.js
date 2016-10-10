@@ -117,7 +117,7 @@ farm.initDateCombo = function(input,format,defaultValue){
 /**
  * 表格格式化日期
  */
-farm.dateToStr = function(dateStr){
+farm.dateToStr = function(dateStr,endDay){
     var myDate = new Date(dateStr);
     var year = myDate.getFullYear();    //获取完整的年份(4位,1970-????)
     var month = myDate.getMonth()+1;       //获取当前月份(0-11,0代表1月)
@@ -125,7 +125,10 @@ farm.dateToStr = function(dateStr){
     var hour = myDate.getHours();       //获取当前小时数(0-23)
     var mm = myDate.getMinutes();     //获取当前分钟数(0-59)
     var ss = myDate.getSeconds();     //获取当前秒数(0-59)
-    return year+"-"+month+"-"+nowDay+" "+hour+"："+mm+"："+ss;
+    if(endDay){
+        return year+"-"+month+"-"+nowDay;
+    }
+    return year+"-"+month+"-"+nowDay+" "+hour+":"+mm+":"+ss;
 }
 
 

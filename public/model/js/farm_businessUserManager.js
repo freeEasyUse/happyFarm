@@ -42,7 +42,12 @@ farm.businessUser.initComment = function(){
         farm.initDateCombo($("#businessUserManager_oprate_modal input[name='buserCreateDate']"),'yyyy-mm-dd hh:ii',new Date());
         farm.initDateCombo($("#businessUserManager_oprate_modal input[name='buserUpdateDate']"),'yyyy-mm-dd hh:ii',new Date());
         farm.initDateCombo($("#businessUserManager_oprate_modal input[name='buserFieldStartDate']"),'yyyy-mm-dd',new Date());
-        farm.initDateCombo($("#businessUserManager_oprate_modal input[name='buserFieldEndDate']"),'yyyy-mm-dd',new Date());
+        var setTime = new Date();
+        if((setTime.getMonth()+3)>11){
+            setTime.setFullYear(setTime.getFullYear()+1);
+        }
+        setTime.setMonth((setTime.getMonth()+3)%12);
+        farm.initDateCombo($("#businessUserManager_oprate_modal input[name='buserFieldEndDate']"),'yyyy-mm-dd',setTime);
 
 }
 
@@ -84,11 +89,17 @@ farm.businessUser.initTable = function(tableId){
     },
     {
     field: 'buserFieldStartDate',
-    title: '开始时间'
+    title: '开始时间',
+    formatter:function(value,row,index){
+    return farm.dateToStr(value,true);
+        }
     },
     {
     field: 'buserFieldEndDate',
-    title: '到期时间'
+    title: '到期时间',
+    formatter:function(value,row,index){
+    return farm.dateToStr(value,true);
+        }
     },
     {
     field: 'buserBusinessDes',
@@ -261,16 +272,18 @@ farm.businessUser.setOptionValue = function(obj){
     $("#businessUserManager_oprate_modal input[name='buserCardNumber']").val(obj.buserCardNumber); //证件号
     $("#businessUserManager_oprate_modal input[name='buserName']").val(obj.buserName);   //用户名
     $("#businessUserManager_oprate_modal input[name='buserPhone']").val(obj.buserPhone); //联系电话
-    $("#businessUserManager_oprate_modal input[name='buserCreateDate']").val(obj.buserCreateDate);   //创建时间
-    $("#businessUserManager_oprate_modal input[name='buserUpdateDate']").val(obj.buserUpdateDate);   //修改时间
+
+    
+    $("#businessUserManager_oprate_modal input[name='buserCreateDate']").datetimepicker('setDate',obj.buserCreateDate);  //创建时间
+    $("#businessUserManager_oprate_modal input[name='buserUpdateDate']").datetimepicker('setDate',obj.buserUpdateDate);//修改时间   
     //$("#businessUserManager_oprate_modal select[name='buserFieldCode']").val(obj.buserFieldCode); //地块编码
     //地块选择
     var soption = "<option value="+obj.buserFieldCode+">"+obj.buserFieldName+"</option>";
     $("#businessUserManager_oprate_modal select[name='buserFieldCode']").append(soption);
     $("#businessUserManager_oprate_modal select[name='buserFieldCode']").val(obj.buserFieldCode);
     $("#businessUserManager_oprate_modal input[name='buserBusinessCode']").val(obj.buserBusinessCode);//关联商家
-    $("#businessUserManager_oprate_modal input[name='buserFieldStartDate']").val(obj.buserFieldStartDate);//租用开始时间
-    $("#businessUserManager_oprate_modal input[name='buserFieldEndDate']").val(obj.buserFieldEndDate);//租用到期时间
+    $("#businessUserManager_oprate_modal input[name='buserFieldStartDate']").datetimepicker('setDate',obj.buserFieldStartDate);//租用开始时间
+    $("#businessUserManager_oprate_modal input[name='buserFieldEndDate']").datetimepicker('setDate',obj.buserFieldEndDate);//租用到期时间
     $("#businessUserManager_oprate_modal input[name='buserBusinessDes']").val(obj.buserBusinessDes);//描述
 }
 

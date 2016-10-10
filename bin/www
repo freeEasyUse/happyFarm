@@ -7,6 +7,16 @@
 var app = require('../app');
 var debug = require('debug')('happyFarm:server');
 var http = require('http');
+//定时任务文件
+var timer = require('../common/timer')
+
+
+
+
+//定时任务启动
+timer.test1();
+
+
 
 /**
  * Get port from environment and store in Express.
