@@ -244,3 +244,13 @@ farm.field.setOptionValue = function(obj){
     $("#field_oprate_modal input[name='field_updateTime']").attr({disabled:'disabled'});
 
 }
+
+
+
+
+/**
+ * 打开批量处理模态框
+ */
+farm.field.openBatchModal = function(){
+    $("#field_batchImport_modal").modal('show');
+}

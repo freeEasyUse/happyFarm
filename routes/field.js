@@ -3,7 +3,8 @@ var router = express.Router();
 var common = require('../common/common');
 var mongooseUtil = require('../database/mongooseUtil');
 var mongoose = require('mongoose');
-var Field = require('../database/entity/fieldEntity')
+var Field = require('../database/entity/fieldEntity');
+var formidable = require('formidable');
 
 /**
  * 商家 地块管理
@@ -51,6 +52,24 @@ router.post('/deleteField',function(req,res,next){
     setObject.fieldStatus = '0';
     var arr = (req.body.arrStr).split(',');
     mongooseUtil.executeUpdate(Field,{fieldCode:{$in:arr}},{$set:setObject},res);
+});
+
+
+
+/**
+ * 批量导入
+ */
+router.post('/batchImport',function(req,res,next){
+   var form = new formidable.IncomingForm();
+   form.uploadDir = "/temp/dir";
+   form.on('end', function() {
+       res.send('success');
+   });
+   
 })
+
+
+
+
 
 module.exports = router;

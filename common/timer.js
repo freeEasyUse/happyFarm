@@ -28,7 +28,7 @@ timer.test1 = function(){
  * 查询到期租赁关系 每天 23 时 执行
  */
 timer.timeUpField = function(){
-    schedule.scheduleJob('* * * * * *', function(){
+    schedule.scheduleJob('* * 23 * * *', function(){
         //查询到期商家用户
         mongooseUtil.clearTimeEndUser(BUser,Field)
     });

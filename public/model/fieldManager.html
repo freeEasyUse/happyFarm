@@ -14,8 +14,8 @@
             <i class="glyphicon glyphicon-list-alt"></i> 修改
         </button>
 
-        <button id="field_update" class="btn btn-warning">
-            <i class="glyphicon glyphicon-list-alt"></i> 查询
+        <button id="field_update" class="btn btn-warning" onclick="farm.field.openBatchModal()">
+            <i class="glyphicon glyphicon-list-alt"></i> 批量导入
         </button>
     </div>
     <table id="field_table"></table>
@@ -94,6 +94,32 @@
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
+    </div>
+
+    <!-- 批量导入模态框 -->
+    <div id="field_batchImport_modal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                     <h4 class="modal-title">批量导入</h4>
+                </div>
+                <div class="modal-body">
+                    <form role="form" action="/field/batchImport" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="field_batchImportInput">选择导入文件</label>
+                            <input type="file" id="field_batchImportInput">
+                        </div>
+                        <input type="submit" value="提交">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                     <button type="button" class="btn btn-primary submit" name="field_batchImport" onclick="">导入</button>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <!-- 查询弹出 -->
