@@ -167,11 +167,30 @@ mongooseHelp.commitTwoDelete = function(userModel,fileModel,arr,res){
 }
 
 
+//定时 清理  到期商家用户
+mongooseHelp.clearTimeEndUser = function(userModel,fieldModel){
+    console.log("定时清理 到期商家用户 开始");
+    //查询到期用户
+    userModel.find({buserFieldEndDate:{$gt:new Date()},buserState:common.state_able},function(err,docs){
+        if(err||docs.length===0){
+            console.log('没有到期用户');
+            return;
+        }
+        else{
+            for(var i = 0;i<docs.length;i++){
+                var tobj = docs[i];
+                //到期用户 修改状态
+                userModel.update({buserCardNumber:tobj.buserCardNumber},{$set:{buserState:common.state_unable}},function(err){
+                    //修改地块状态
+                    console.log(tobj);
+                    fieldModel.update({fieldCode:tobj.buserFieldCode},{$set:{fieldStatus:common.state_free,fieldUserCode:"",fieldUserName:"",fieldUpdateTime:new Date()}},function(err){
+                        console.log('timer success');
+                    });
+                })
+            }
+        }
 
-
-
-
-
-
+    });
+}
 
 module.exports = mongooseHelp;

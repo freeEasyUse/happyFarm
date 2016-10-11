@@ -14,7 +14,8 @@ var timer = require('../common/timer')
 
 
 //定时任务启动
-timer.test1();
+//timer.test1();
+timer.timeUpField();
 
 
 
