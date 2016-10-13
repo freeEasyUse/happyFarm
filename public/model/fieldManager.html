@@ -108,7 +108,11 @@
                     <form role="form" action="/field/batchImport" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="field_batchImportInput">选择导入文件</label>
-                            <input type="file" id="field_batchImportInput">
+                            <input type="file" id="field_batchImportInput" name="field_batchImportInput">
+                        </div>
+                        <div class="form-group">
+                            <label>测试</label>
+                            <input id="field_batchImportText" name="field_batchImportText">
                         </div>
                         <input type="submit" value="提交">
                     </form>

@@ -5,6 +5,7 @@ var mongooseUtil = require('../database/mongooseUtil');
 var mongoose = require('mongoose');
 var Field = require('../database/entity/fieldEntity');
 var formidable = require('formidable');
+var xlsx = require("node-xlsx");
 
 /**
  * 商家 地块管理
@@ -61,9 +62,25 @@ router.post('/deleteField',function(req,res,next){
  */
 router.post('/batchImport',function(req,res,next){
    var form = new formidable.IncomingForm();
-   form.uploadDir = "/temp/dir";
-   form.on('end', function() {
-       res.send('success');
+   //设置上传目录
+   form.uploadDir = "/temp";
+   form.type = true;
+   
+
+   /**
+    * 可以修改上传文件的信息等
+    */
+   form.on('fileBegin', function(name, file) {
+       file.path = '/temp/'+file.name;
+    });
+
+
+   /**
+    * 解析from表单内容 当前文件已经上传完成
+    */
+   form.parse(req,function(error,fields,files){
+      var list = xlsx.parse(files.field_batchImportInput.path);
+      console.log(list);
    });
    
 })
