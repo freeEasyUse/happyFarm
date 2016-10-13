@@ -6,6 +6,7 @@ var mongoose = require('mongoose');
 var Field = require('../database/entity/fieldEntity');
 var formidable = require('formidable');
 var xlsx = require("node-xlsx");
+var fs = require('fs');
 
 /**
  * 商家 地块管理
@@ -80,6 +81,7 @@ router.post('/batchImport',function(req,res,next){
     */
    form.parse(req,function(error,fields,files){
       var list = xlsx.parse(files.field_batchImportInput.path);
+      fs.unlinkSync(files.field_batchImportInput.path)
       console.log(list);
    });
    
