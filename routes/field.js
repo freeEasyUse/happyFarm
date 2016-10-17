@@ -81,8 +81,35 @@ router.post('/batchImport',function(req,res,next){
     */
    form.parse(req,function(error,fields,files){
       var list = xlsx.parse(files.field_batchImportInput.path);
-      fs.unlinkSync(files.field_batchImportInput.path)
-      console.log(list);
+      //删除文件
+      fs.unlinkSync(files.field_batchImportInput.path);
+      //批量插入
+      var pushArray = new Array();
+      var objs = list[0].data;
+      for(var i=1;i<objs.length;i++){
+          var objArr = objs[i];
+          var objSet = new Object();
+          objSet.fieldName = objArr[0];
+          objSet.fieldCode = objArr[1];
+          objSet.fieldPartnerCode = objArr[2];
+          objSet.fieldPartnerName = objArr[3];
+          objSet.fieldStatus = objArr[4];
+          objSet.fieldSize = objArr[5];
+          objSet.fieldVedio = objArr[6];
+          objSet.fieldCreateTime = new Date();
+          objSet.fieldUpdateTime = new Date();
+          pushArray.push(objSet);
+      }
+      if(pushArray.length===0){
+        var result = new Object();
+        result.state = 'error';
+        result.message = '数据为空';
+        res.send(JSON.stringify(result));
+      }
+      else{
+        mongooseUtil.saveBatch(Field,pushArray,res);
+      }
+     
    });
    
 })

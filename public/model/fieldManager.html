@@ -105,21 +105,19 @@
                      <h4 class="modal-title">批量导入</h4>
                 </div>
                 <div class="modal-body">
-                    <form role="form" action="/field/batchImport" method="post" enctype="multipart/form-data">
+                    <form role="form" id="field_batchForm" action="/field/batchImport" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="field_batchImportInput">选择导入文件</label>
                             <input type="file" id="field_batchImportInput" name="field_batchImportInput">
                         </div>
                         <div class="form-group">
-                            <label>测试</label>
-                            <input id="field_batchImportText" name="field_batchImportText">
+                            <label><a href="../download/地块管理批量导入模版.xls">地块添加批量模版下载</a></label>
                         </div>
-                        <input type="submit" value="提交">
                     </form>
                 </div>
                 <div class="modal-footer">
                      <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                     <button type="button" class="btn btn-primary submit" name="field_batchImport" onclick="">导入</button>
+                     <button type="button" class="btn btn-primary submit" onclick="farm.field.subjectBatch()">导入</button>
                 </div>
             </div>
         </div>
@@ -167,3 +165,4 @@
     </div>
 </div>
 <script src="model/js/farm_fieldManager.js"></script>
+<script src="../js/jquery_form.js"></script>

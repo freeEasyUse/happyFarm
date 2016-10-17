@@ -193,4 +193,23 @@ mongooseHelp.clearTimeEndUser = function(userModel,fieldModel){
     });
 }
 
+
+
+//批量插入
+mongooseHelp.saveBatch = function(model,arryObj,res){
+    model.create(arryObj,function(error,candies){
+        var result = new Object();
+        if(error){
+            result.state = 'error';
+            console.log('update error');
+        }
+        else{
+            result.state = 'success';
+        }
+         res.send(JSON.stringify(result));
+    });
+}
+
+
+
 module.exports = mongooseHelp;

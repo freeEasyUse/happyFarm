@@ -254,3 +254,28 @@ farm.field.setOptionValue = function(obj){
 farm.field.openBatchModal = function(){
     $("#field_batchImport_modal").modal('show');
 }
+
+
+
+/**
+ * 批量处理提交
+ */
+farm.field.subjectBatch = function(){
+    $("#field_batchForm").ajaxSubmit({
+        success:function(data){
+        var obj = jQuery.parseJSON(data);
+        //成功提示
+        if(obj.state ==='success'){
+            bootbox.alert({message:'操作成功',title : '提示'});
+            //刷新表格
+            $('#field_table').bootstrapTable('refresh',{silent: true});
+        }
+        else{
+            bootbox.alert({message:obj.message,title : '提示'});
+        }
+        $("#field_batchImport_modal").hide();
+        }
+        //关闭
+        
+    })
+}
