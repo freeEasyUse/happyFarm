@@ -275,7 +275,5 @@ farm.field.subjectBatch = function(){
         }
         $("#field_batchImport_modal").hide();
         }
-        //关闭
-        
     })
 }
