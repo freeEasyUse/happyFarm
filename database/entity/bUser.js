@@ -12,7 +12,8 @@ var BUserSchema = mongoose.Schema({
     buserFieldStartDate:Date,
     buserFieldEndDate:Date,
     buserBusinessDes:String,
-    buserState:Number
+    buserState:Number,
+    buserPassword:String
 });
 
 

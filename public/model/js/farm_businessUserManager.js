@@ -113,11 +113,6 @@ farm.businessUser.initTable = function(tableId){
     farm.initTable(tableId,settingParam);
 }
 
-
-
-
-
-
 //加载完成后 执行
 $(document).ready(function() {
     farm.businessUser.initTable("#businessUserManager_table");
@@ -261,6 +256,7 @@ farm.businessUser.getOptionValue = function(){
     obj.buserFieldStartDate = $("#businessUserManager_oprate_modal input[name='buserFieldStartDate']").val();//租用开始时间
     obj.buserFieldEndDate = $("#businessUserManager_oprate_modal input[name='buserFieldEndDate']").val();//租用到期时间
     obj.buserBusinessDes = $("#businessUserManager_oprate_modal input[name='buserBusinessDes']").val();//描述
+    obj.buserPassword = 111111;
     return obj;
 }
 

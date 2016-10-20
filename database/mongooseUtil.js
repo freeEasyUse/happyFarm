@@ -5,6 +5,7 @@ var mongooseHelp = new Object();
 var mongoose = require('mongoose');
 var TransactionEntity = require('../database/entity/transcationEntity.js');
 var common = require('../common/common');
+var BUser = require('../database/entity/bUser');
 mongoose.connect('mongodb://localhost/happyFarm');
 
 /**
@@ -210,6 +211,33 @@ mongooseHelp.saveBatch = function(model,arryObj,res){
     });
 }
 
+
+
+
+
+
+//商家用户 登录
+mongooseHelp.buserLogin = function(userName,password,req,res){
+    //查询记录
+    BUser.findOne({$or:[{buserCardNumber:userName},{buserName:userName},{buserPhone:userName}],buserPassword:password},function(err, adventure){
+         var result = new Object();
+        if(err){
+            result.status = "ERROR";
+        }
+        //为空
+        if(adventure==null){
+            result.status = "ERROR";
+        }
+        else{
+            var userSession = new Object();
+            userSession.userCode  = adventure._doc.buserCardNumber;
+            userSession.userName = adventure._doc.buserName;
+            req.session.user = userSession;
+            result.status = "Success";
+        }
+        res.send(JSON.stringify(result));
+    });
+}
 
 
 module.exports = mongooseHelp;
